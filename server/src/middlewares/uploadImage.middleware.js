@@ -15,7 +15,7 @@ const uploadImage = multer({
             cb(null, true);
         }
         else{
-            cb(new Error("Only image Files are allowed."))
+            cb(new Error("Only image Files are allowed."), false)
         }
 
     }

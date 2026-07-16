@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 
 import errorHandler from "./middlewares/error.middleware.js";
 import appRoutes from "./routes/auth.routes.js";
+import resumeRoutes from "./routes/resume.routes.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", appRoutes);
+app.use("/api/resume", resumeRoutes);
 
 
 app.use(errorHandler);
