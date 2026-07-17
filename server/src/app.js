@@ -7,6 +7,7 @@ import appRoutes from "./routes/auth.routes.js";
 import resumeRoutes from "./routes/resume.routes.js";
 import leetcodeRoutes from "./routes/leetcode.routes.js";
 import codeforcesRoutes from "./routes/codeforces.routes.js";
+import jobMatcherRoutes from "./routes/jobMatcher.routes.js";
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/api/auth", appRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use("/api/leetcode", leetcodeRoutes);
 app.use("/api/codeforces", codeforcesRoutes);
+app.use("/api/job-match", jobMatcherRoutes);
 
 
 app.use(errorHandler);

@@ -79,5 +79,5 @@ export const getCurrentResumeC = asyncHandler(async (req, res) => {
         message,
         data,
     });
-
+    
 });
