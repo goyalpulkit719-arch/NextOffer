@@ -95,7 +95,7 @@ export const getLeetcodeDashboard = asyncHandler(async (req, res) => {
         });
     };
 
-    const latestData = await fetchLatestLeetcodeData(usrename);
+    const latestData = await fetchLatestLeetcodeData(username);
 
     if(hasProfileChanged(profile, latestData)) {
         await createHistorySnapshot(req.user._id, latestData);
