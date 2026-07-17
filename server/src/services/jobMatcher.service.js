@@ -38,3 +38,38 @@ export const generateJobMatchAnalysis = async ( userId, jobTitle, companyName, j
     return jobMatch;
 
 };
+
+
+export const getJobMatchHistory = async (userId) => {
+
+    const history = await JobMatch.find(
+        { userId },
+        {
+            jobTitle: 1,
+            companyName: 1,
+            updatedAt: 1,
+        }
+    )
+        .sort({ updatedAt: -1 })
+
+    return history;
+
+};
+
+
+export const getJobMatchAnalysis = async (userId, jobMatchId) => {
+
+    const jobMatch = await JobMatch.findOne({
+        _id: jobMatchId,
+        userId,
+    });
+
+    if (!jobMatch) {
+        const error = new Error("Job match analysis not found.");
+        error.statusCode = 404;
+        throw error;
+    }
+
+    return jobMatch;
+
+};
