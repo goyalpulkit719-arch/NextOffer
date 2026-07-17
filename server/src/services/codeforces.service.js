@@ -11,6 +11,7 @@ export const fetchCodeforcesProfile = async (username) => {
         error.statusCode = 400;
         throw error;
     }
+    
     const user = data.result[0];
 
     return {
@@ -67,6 +68,17 @@ export const fetchCodeforcesSubmissions = async (username) => {
 
     const submissions = data.result;
 
+    let joinedYear = null;
+
+    if (submissions.length > 0) {
+        const oldestSubmission =
+            submissions[submissions.length - 1];
+
+        joinedYear = new Date(
+            oldestSubmission.creationTimeSeconds * 1000
+        ).getFullYear();
+    }
+
     const now = Date.now();
 
     const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
@@ -107,5 +119,7 @@ export const fetchCodeforcesSubmissions = async (username) => {
         submissionsLastWeek,
 
         submissionsLastMonth,
+
+        joinedYear,
     };
 };

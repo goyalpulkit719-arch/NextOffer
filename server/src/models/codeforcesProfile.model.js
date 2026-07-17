@@ -84,7 +84,9 @@ const codeforcesProfileSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
-
+        joinedYear: {
+            type: Number,
+        },
         lastFetchedAt: {
             type: Date,
             default: Date.now,
