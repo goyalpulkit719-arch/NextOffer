@@ -136,6 +136,16 @@ const leetcodeProfileSchema = new mongoose.Schema(
             type: Date,
             default: Date.now,
         },
+        
+        submissionsLastWeek: {
+            type: Number,
+            default: 0,
+        },
+
+        submissionsLastMonth: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         timestamps: true,

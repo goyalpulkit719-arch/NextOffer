@@ -74,6 +74,27 @@ export const fetchLeetcodeCalendar = async (username) => {
         `https://leetcode-api-pied.vercel.app/user/${username}/calendar`
     );
 
+    const now = Date.now();
+
+    const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
+    const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
+
+    let submissionsLastWeek = 0;
+    let submissionsLastMonth = 0;
+
+    for (const [timestamp, submissions] of Object.entries(data.submissionCalendar)) {
+
+        const date = Number(timestamp) * 1000;
+
+        if (date >= oneWeekAgo) {
+            submissionsLastWeek += submissions;
+        }
+
+        if (date >= oneMonthAgo) {
+            submissionsLastMonth += submissions;
+        }
+    }
+
     return {
         joinedYear: Math.min(...data.activeYears),
 
@@ -82,6 +103,10 @@ export const fetchLeetcodeCalendar = async (username) => {
         totalActiveDays: data.totalActiveDays,
 
         submissionCalendar: data.submissionCalendar,
+
+        submissionsLastWeek,
+
+        submissionsLastMonth,
     };
 };
 
