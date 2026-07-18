@@ -1,14 +1,7 @@
-import { useSelector } from "react-redux"
+import { Outlet } from "react-router-dom";
 
-const App = () => {
-
-  const auth = useSelector((state) => state.auth);
-
-  return (
-    <div className="p-10">
-      <pre>{JSON.stringify(auth, null, 2)}</pre>
-    </div>
-  )
+function App() {
+    return <Outlet />;
 }
 
-export default App
+export default App;
