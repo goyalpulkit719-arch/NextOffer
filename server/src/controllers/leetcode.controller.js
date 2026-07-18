@@ -6,7 +6,7 @@ import { LeetcodeHistory } from "../models/leetcodeHistory.model.js";
 import { fetchLeetcodeProfile, fetchLeetcodeContest, fetchLeetcodeCalendar, fetchLeetcodeSkills, } from "../services/leetcode.service.js";
 
 const LEETCODE_CACHE_DURATION = 12 * 60 * 60 * 1000;
-const LEETCODE_REFRESH_DURATION = 1000;
+const LEETCODE_REFRESH_DURATION = 30*60*1000;
 
 const fetchLatestLeetcodeData = async (username) => {
     const [profile, contest, calendar, skills] = await Promise.all([

@@ -1,31 +1,44 @@
 import axios from "axios";
 
 export const fetchCodeforcesProfile = async (username) => {
+    try {
+        const { data } = await axios.get(
+            `https://codeforces.com/api/user.info?handles=${username}`
+        );
 
-    const { data } = await axios.get(
-        `https://codeforces.com/api/user.info?handles=${username}`
-    );
+        if (data.status !== "OK") {
+            const error = new Error(data.comment || "Failed to fetch Codeforces data.");
+            error.statusCode = 400;
+            throw error;
+        }
+        
+        const user = data.result[0];
 
-    if (data.status !== "OK") {
-        const error = new Error(data.comment || "Failed to fetch Codeforces data.");
-        error.statusCode = 400;
-        throw error;
+        return {
+            username: user.handle,
+
+            currentRating: user.rating || 0,
+
+            maxRating: user.maxRating || 0,
+
+            currentRank: user.rank || "",
+
+            maxRank: user.maxRank || "",
+        };
+
+    } catch (err) {
+
+        if (err.response?.status === 400) {
+            const error = new Error("Invalid Codeforces username.");
+            error.statusCode = 400;
+            throw error;
+        }
+
+        throw err;
     }
-    
-    const user = data.result[0];
-
-    return {
-        username: user.handle,
-
-        currentRating: user.rating || 0,
-
-        maxRating: user.maxRating || 0,
-
-        currentRank: user.rank || "",
-
-        maxRank: user.maxRank || "",
-    };
 };
+
+
 
 
 export const fetchCodeforcesContestHistory = async (username) => {
