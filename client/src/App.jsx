@@ -1,11 +1,12 @@
-import React from 'react'
+import { useSelector } from "react-redux"
 
 const App = () => {
+
+  const auth = useSelector((state) => state.auth);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <h1 className="text-5xl font-bold text-blue-600">
-        NextOffer
-      </h1>
+    <div className="p-10">
+      <pre>{JSON.stringify(auth, null, 2)}</pre>
     </div>
   )
 }
