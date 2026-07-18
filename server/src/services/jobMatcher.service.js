@@ -1,7 +1,7 @@
 import downloadPdf from "../utils/downloadPdf.js";
 import { jobMatcherPrompt } from "../prompts/jobMatcher.prompt.js";
 import validateJobMatch from "../utils/validateJobMatch.js";
-import analyzeResumeWithGemini from "./gemini.service.js";
+import {analyzeResumeWithGemini} from "./gemini.service.js";
 import Resume from "../models/resume.model.js";
 import JobMatch from "../models/jobMatcher.model.js";
 

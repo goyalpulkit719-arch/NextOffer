@@ -2,7 +2,7 @@ import Resume from "../models/resume.model.js";
 import User from "../models/user.model.js";
 import downloadPdf from "../utils/downloadPdf.js"
 import resumeAnalysisPrompt from "../prompts/resumeAnalysis.prompt.js";
-import analyzeResumeWithGemini from "./gemini.service.js";
+import {analyzeResumeWithGemini} from "./gemini.service.js";
 import validateResumeAnalysis from "../utils/validateResumeAnalysis.js";
 
 

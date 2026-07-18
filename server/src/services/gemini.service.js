@@ -41,4 +41,31 @@ const analyzeResumeWithGemini = async ( pdfBuffer, prompt ) => {
 
 };
 
-export default analyzeResumeWithGemini;
+const generateContentWithGemini = async (prompt) => {
+  const response = await ai.models.generateContent({
+    model,
+
+    contents: [
+      {
+        text: prompt,
+      },
+    ],
+
+    config: {
+      responseMimeType: "application/json",
+    },
+  });
+
+  if (!response.text) {
+    throw new Error("Failed to generate content");
+  }
+
+  try {
+    return JSON.parse(response.text);
+  } catch {
+    throw new Error("Gemini returned an invalid JSON response");
+  }
+  
+};
+
+export {analyzeResumeWithGemini, generateContentWithGemini};

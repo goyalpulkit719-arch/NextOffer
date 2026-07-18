@@ -8,6 +8,7 @@ import resumeRoutes from "./routes/resume.routes.js";
 import leetcodeRoutes from "./routes/leetcode.routes.js";
 import codeforcesRoutes from "./routes/codeforces.routes.js";
 import jobMatcherRoutes from "./routes/jobMatcher.routes.js";
+import companyInsightRoutes from "./routes/companyInsight.routes.js";
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api/resume", resumeRoutes);
 app.use("/api/leetcode", leetcodeRoutes);
 app.use("/api/codeforces", codeforcesRoutes);
 app.use("/api/job-match", jobMatcherRoutes);
+app.use("/api/company-insight", companyInsightRoutes);
 
 
 app.use(errorHandler);

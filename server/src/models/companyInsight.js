@@ -46,15 +46,32 @@ const companyInsightSchema = new mongoose.Schema(
     hiringProcess: [
       {
         round: {
-          type: String,
-          required: true,
+            type: String,
+            required: true,
         },
 
-        description: {
-          type: String,
-          required: true,
+        duration: {
+            type: String,
+            default: "",
         },
-      },
+
+        focus: [
+            {
+            type: String,
+            },
+        ],
+
+        description: {
+            type: String,
+            required: true,
+        },
+
+        preparationTips: [
+            {
+            type: String,
+            },
+        ],
+      }
     ],
     difficultyAnalysis: {
         dsa: {
