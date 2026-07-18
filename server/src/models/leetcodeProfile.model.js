@@ -146,6 +146,10 @@ const leetcodeProfileSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        calendarAvailable: {
+            type: Boolean,
+            default: true,
+        },
     },
     {
         timestamps: true,

@@ -70,44 +70,58 @@ export const fetchLeetcodeContest = async (username) => {
 };
 
 export const fetchLeetcodeCalendar = async (username) => {
-    const { data } = await axios.get(
-        `https://leetcode-api-pied.vercel.app/user/${username}/calendar`
-    );
+    try {
+        const { data } = await axios.get(
+            `https://leetcode-api-pied.vercel.app/user/${username}/calendar`
+        );
 
-    const now = Date.now();
+        const now = Date.now();
 
-    const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
-    const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
+        const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
+        const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
 
-    let submissionsLastWeek = 0;
-    let submissionsLastMonth = 0;
+        let submissionsLastWeek = 0;
+        let submissionsLastMonth = 0;
 
-    for (const [timestamp, submissions] of Object.entries(data.submissionCalendar)) {
+        for (const [timestamp, submissions] of Object.entries(data.submissionCalendar)) {
 
-        const date = Number(timestamp) * 1000;
+            const date = Number(timestamp) * 1000;
 
-        if (date >= oneWeekAgo) {
-            submissionsLastWeek += submissions;
+            if (date >= oneWeekAgo) {
+                submissionsLastWeek += submissions;
+            }
+
+            if (date >= oneMonthAgo) {
+                submissionsLastMonth += submissions;
+            }
         }
 
-        if (date >= oneMonthAgo) {
-            submissionsLastMonth += submissions;
-        }
+        return {
+            joinedYear: Math.min(...data.activeYears),
+            maxStreak: data.streak,
+            totalActiveDays: data.totalActiveDays,
+            submissionCalendar: data.submissionCalendar,
+            submissionsLastWeek,
+            submissionsLastMonth,
+            calendarAvailable: true,
+
+        };
+
+    } catch (err) {
+
+        // Calendar hidden or unavailable
+
+        return {
+            joinedYear: null,
+            maxStreak: 0,
+            totalActiveDays: 0,
+            submissionCalendar: {},
+            submissionsLastWeek: 0,
+            submissionsLastMonth: 0,
+            calendarAvailable: false,
+
+        };
     }
-
-    return {
-        joinedYear: Math.min(...data.activeYears),
-
-        maxStreak: data.streak,
-
-        totalActiveDays: data.totalActiveDays,
-
-        submissionCalendar: data.submissionCalendar,
-
-        submissionsLastWeek,
-
-        submissionsLastMonth,
-    };
 };
 
 export const fetchLeetcodeSkills = async (username) => {
