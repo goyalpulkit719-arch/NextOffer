@@ -49,8 +49,7 @@ export const getJobMatchHistory = async (userId) => {
             companyName: 1,
             updatedAt: 1,
         }
-    )
-        .sort({ updatedAt: -1 })
+    ).populate({path: "resumeId", select:"originalName fileUrl"}).sort({ updatedAt: -1 })
 
     return history;
 
@@ -62,7 +61,7 @@ export const getJobMatchAnalysis = async (userId, jobMatchId) => {
     const jobMatch = await JobMatch.findOne({
         _id: jobMatchId,
         userId,
-    });
+    }).populate({path: "resumeId", select:"originalName fileUrl"});
 
     if (!jobMatch) {
         const error = new Error("Job match analysis not found.");

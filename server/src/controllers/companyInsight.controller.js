@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import CompanyInsight from "../models/CompanyInsight.js";
+import CompanyInsight from "../models/CompanyInsight.model.js";
 import { generateCompanyInsight } from "../services/companyInsight.service.js";
 
 export const getCompanyInsight = asyncHandler(async (req, res) => {
