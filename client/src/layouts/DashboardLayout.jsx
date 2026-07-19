@@ -21,7 +21,6 @@ function DashboardLayout() {
   }
 
   if (!isLoggedIn) {
-    toast.info("Login Required");
     return <Navigate to="/" replace />;
   }
 

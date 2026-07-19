@@ -92,6 +92,12 @@ function Profile() {
       formData.append("resume", file);
 
       await uploadResume(formData);
+      dispatch(
+        setUser({
+          ...user,
+          hasResume: true,
+        })
+      );
       await loadResume();
 
       toast.success("Resume updated.");

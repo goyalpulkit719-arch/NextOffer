@@ -29,7 +29,13 @@ const authSlice = createSlice({
 
         setUser: (state, action) => {
             state.isLoggedIn = true;
-            state.user = action.payload;
+
+            state.user = {
+                ...action.payload,
+                hasResume:
+                    action.payload.hasResume ??
+                    Boolean(action.payload.currentResume),
+            };
         },
 
         logout: (state) => {

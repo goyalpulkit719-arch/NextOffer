@@ -7,7 +7,7 @@ export const pageConfig = {
     "/resume-analyzer": {
         title: "Resume Analyzer",
         subtitle: "Analyze your resume with AI.",
-        historyPath: "/resume-history",
+        historyPath: "/resume-analyzer/history",
     },
 
     "/resume-analyzer/history": {

@@ -78,7 +78,6 @@ export const getCompanyInsight = asyncHandler(async (req, res) => {
   });
 });
 
-
 export const getCompanyHistory = asyncHandler(async (req, res) => {
   const history = await companyHistory.find({
     userId: req.user._id,

@@ -144,10 +144,6 @@ export const getResumeHistory = async(userId) => {
     .select("_id originalName fileUrl fileSize isCurrent updatedAt analysis.ats.score analysis.placementReadiness")
     .sort({createdAt: -1});
 
-    if(resumes.length === 0) {
-        throw new Error("No analyzed resumes found");
-    }
-
     return resumes;
 
 };
