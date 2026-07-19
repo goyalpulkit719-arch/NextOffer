@@ -3,7 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 function PublicLayout() {
 
-  const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.auth);
 
   if (isLoading) {
       return (
@@ -11,10 +11,6 @@ function PublicLayout() {
               <ClipLoader size={40} />
           </div>
       );
-  }
-
-  if (isLoggedIn) {
-      return <Navigate to="/dashboard" replace />;
   }
 
   return <Outlet />;

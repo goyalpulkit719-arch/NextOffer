@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Pencil } from "lucide-react";
+import { toast } from "sonner";
 
 const getErrorMessage = (error) =>
   error.response?.data?.message || "Unable to update this username.";
@@ -37,7 +38,7 @@ function LinkedAccountCard({ type, username, icon: Icon, color, onSave }) {
 
   return (
     <motion.section
-      whileHover={{ y: -3 }}
+      whileHover={{ y: 3 }}
       className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-4">
@@ -58,6 +59,11 @@ function LinkedAccountCard({ type, username, icon: Icon, color, onSave }) {
           type="button"
           onClick={() => {
             setError("");
+            if (!isEditing) {
+              toast.warning(
+                `Changing your ${type} username will clear its history data.`
+              );
+            }
             setIsEditing((currentValue) => !currentValue);
           }}
           className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"

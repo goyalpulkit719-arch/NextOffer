@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import AppFooter from "../components/AppFooter";
+import { toast } from "sonner";
 
 function DashboardLayout() {
   const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
@@ -20,7 +21,8 @@ function DashboardLayout() {
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
+    toast.info("Login Required");
+    return <Navigate to="/" replace />;
   }
 
   return (

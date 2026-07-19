@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-
 import { registerUser } from "../api/authApi";
 import { setUser } from "../app/authSlice";
 
 function Signup() {
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  if (isLoggedIn) {
+        return <Navigate to="/dashboard" replace />;
+  }
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
