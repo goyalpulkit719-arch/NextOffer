@@ -16,6 +16,7 @@ import ResumeChecklist from "../components/resume/ResumeChecklist";
 import FeedbackCard from "../components/resume/FeedbackCard";
 import MissingKeywords from "../components/resume/MissingKeywords";
 import PriorityFixes from "../components/resume/PriorityFixes";
+import ResumePageSkeleton from "../components/resume/ResumePageSkeleton";
 
 const getErrorMessage = (error) =>
   error.response?.data?.message || "Something went wrong. Please try again.";
@@ -119,16 +120,7 @@ function ResumeAnalyzer() {
   };
 
   if (pageState === "loading") {
-    return (
-      <div className="space-y-6 animate-pulse">
-        <div className="h-28 rounded-2xl bg-slate-200" />
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="h-52 rounded-2xl bg-slate-200" />
-          <div className="h-52 rounded-2xl bg-slate-200" />
-        </div>
-        <div className="h-72 rounded-2xl bg-slate-200" />
-      </div>
-    );
+    return <ResumePageSkeleton />;
   }
 
   if (pageState === "error") {

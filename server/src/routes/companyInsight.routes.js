@@ -4,7 +4,7 @@ import {getCompanyInsight, getCompanyHistory, getCompanyInsightById} from "../co
 
 const router = express.Router();
 
-router.get("/analysis", authMiddleware, getCompanyInsight);
+router.post("/analysis", authMiddleware, getCompanyInsight);
 router.get("/history", authMiddleware, getCompanyHistory);
 router.get("/analysis/:id", authMiddleware, getCompanyInsightById);
 

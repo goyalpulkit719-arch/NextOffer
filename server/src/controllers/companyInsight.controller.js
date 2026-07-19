@@ -84,7 +84,7 @@ export const getCompanyHistory = asyncHandler(async (req, res) => {
   })
     .populate({
       path: "companyInsightId",
-      select: "companyName",
+      select: "companyName updatedAt",
     })
     .sort({ viewedAt: -1 });
 
