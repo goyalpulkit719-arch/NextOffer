@@ -1,12 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    isLoading: false,
+    isLoading: true,
     isLoggedIn: false,
 
     user: {
         id: "",
-        name: "Pulkit Goyal",
+        name: "",
         email: "",
         avatar: "",
         leetcodeUsername: "",

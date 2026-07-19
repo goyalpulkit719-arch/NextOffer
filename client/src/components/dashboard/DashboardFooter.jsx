@@ -1,0 +1,55 @@
+import { Heart, Rocket } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const footerLinks = [
+  { label: "Resume Analyzer", path: "/resume-analyzer" },
+  { label: "Job Matcher", path: "/job-matcher" },
+  { label: "Company Insights", path: "/company-insights" },
+  { label: "AI Next Steps", path: "/next-steps" },
+];
+
+function DashboardFooter() {
+  return (
+    <footer className="mt-12 border-t border-slate-200 pt-8">
+      <div className="rounded-2xl border border-slate-200 bg-white px-5 py-7 shadow-sm md:px-8">
+        <div className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-start">
+          <div>
+            <div className="flex items-center gap-2 text-slate-900">
+              <Rocket size={18} className="text-blue-600" />
+              <p className="font-semibold">Built for your next engineering offer</p>
+            </div>
+
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">
+              NextOffer brings your coding progress, resume strengths, and company
+              goals into one focused placement-preparation workspace.
+            </p>
+          </div>
+
+          <nav className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+            {footerLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="font-medium text-slate-600 transition hover:text-blue-600"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div className="mt-7 flex flex-col gap-3 border-t border-slate-100 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>NextOffer v1.0 · React · Node.js · MongoDB · Gemini AI</p>
+
+          <p className="flex items-center gap-1">
+            Made with <Heart size={13} className="fill-rose-500 text-rose-500" /> for ambitious engineers
+          </p>
+
+          <p>© 2026 NextOffer</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export default DashboardFooter;

@@ -26,6 +26,11 @@ export const updateTargetCompany = async (targetCompany) => {
 };
 
 export const updateAvatar = async (formData) => {
-  const { data } = await api.patch("/auth/avatar", formData);
+  const { data } = await api.post("/auth/avatar", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   return data;
 };

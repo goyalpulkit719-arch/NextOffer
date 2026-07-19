@@ -68,7 +68,14 @@ export const getLeetcodeDashboard = asyncHandler(async (req, res) => {
     let profile = await LeetcodeProfile.findOne({user: req.user._id});
 
     if(!profile) {
-        const latestData = await fetchLatestLeetcodeData(username);
+        let latestData
+            try {
+            latestData = await fetchLeetcodeProfile(username.trim());
+        } catch (err) {
+            const error = new Error("Invalid LeetCode username.");
+            error.statusCode = 400;
+            throw error;
+        }
 
         profile = await LeetcodeProfile.create({
             user: req.user._id,

@@ -60,6 +60,7 @@ function Header({ setSidebarOpen }) {
 
         {/* User */}
         <button
+          onClick={() => navigate("/profile")}
           className="
             flex items-center gap-3
             rounded-xl

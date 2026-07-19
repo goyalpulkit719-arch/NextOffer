@@ -1,11 +1,25 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
-
+import { Outlet, Navigate } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
 function DashboardLayout() {
+  const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  if (isLoading) {
+      return (
+          <div className="flex min-h-screen items-center justify-center">
+              <ClipLoader size={40} />
+          </div>
+      );
+  }
+
+  if (!isLoggedIn) {
+      return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">

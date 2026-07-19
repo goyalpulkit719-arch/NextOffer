@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
+import Resume from "../models/resume.model.js";
 
 const registerUser = async (userData) => {
   const existingUser = await User.findOne({ email: userData.email });
@@ -79,7 +80,7 @@ const updateAvatar = async (userId, avatarUrl) => {
 };
 
 const getCurrentUser = async (userId) => {
-  const user = await User.findById(userId).select("-password");
+  const user = await User.findById(userId).select("-password").populate("currentResume", "fileUrl originalName");
 
   if (!user) {
     throw new Error("User not found");
