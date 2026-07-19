@@ -2,7 +2,7 @@ import React from 'react'
 
 const Landing = () => {
   return (
-    <div>
+    <div className='bg-slate-50'>
       Landing
     </div>
   )

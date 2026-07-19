@@ -15,6 +15,11 @@ import CompanyInsights from "../pages/CompanyInsights";
 import NextSteps from "../pages/NextSteps";
 import Profile from "../pages/Profile";
 
+import ResumeAnalyzerHistory from "../pages/ResumeAnalyzerHistory";
+import JobMatcherHistory from "../pages/JobMatcherHistory";
+import CompanyInsightsHistory from "../pages/CompanyInsightsHistory";
+import NextStepsHistory from "../pages/NextStepsHistory";
+
 export const router = createBrowserRouter([
   {
     element: <App />,
@@ -52,12 +57,28 @@ export const router = createBrowserRouter([
             element: <ResumeAnalyzer />,
           },
           {
+            path: "resume-analyzer/history",
+            element: <ResumeAnalyzerHistory/>,
+          },
+          {
             path: "job-matcher",
             element: <JobMatcher />,
           },
           {
+            path: "job-matcher/history",
+            element: <JobMatcherHistory />,
+          },
+          {
             path: "company-insights",
             element: <CompanyInsights />,
+          },
+          {
+            path: "company-insights/history",
+            element: <CompanyInsightsHistory />,
+          },
+          {
+            path: "next-steps/history",
+            element: <NextStepsHistory />,
           },
           {
             path: "next-steps",

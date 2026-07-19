@@ -1,11 +1,215 @@
-import React from 'react'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 
-const Signup = () => {
+import { registerUser } from "../api/authApi";
+import { setUser } from "../app/authSlice";
+
+function Signup() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    leetcodeUsername: "",
+    codeforcesUsername: "",
+    targetCompany: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await registerUser(formData);
+
+      dispatch(setUser(response.data));
+
+      // We will fetch LeetCode & Codeforces profiles here later.
+
+      toast.success(response.message);
+
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Something went wrong."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div>
-      Signup
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
+      <div className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-8 shadow-lg">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-slate-900">
+            Create Account
+          </h1>
+
+          <p className="mt-2 text-slate-500">
+            Start your AI-powered placement preparation.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5"
+        >
+          <div>
+            <label
+              htmlFor="name"
+              className="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Full Name
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              name="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Enter your full name"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Email Address
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Password
+            </label>
+
+            <input
+              id="password"
+              type="password"
+              name="password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Create a password"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="leetcodeUsername"
+              className="mb-2 block text-sm font-medium text-slate-700"
+            >
+              LeetCode Username
+            </label>
+
+            <input
+              id="leetcodeUsername"
+              type="text"
+              name="leetcodeUsername"
+              required
+              value={formData.leetcodeUsername}
+              onChange={handleChange}
+              placeholder="Enter your LeetCode username"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="codeforcesUsername"
+              className="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Codeforces Username
+            </label>
+
+            <input
+              id="codeforcesUsername"
+              type="text"
+              name="codeforcesUsername"
+              required
+              value={formData.codeforcesUsername}
+              onChange={handleChange}
+              placeholder="Enter your Codeforces username"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="targetCompany"
+              className="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Target Company
+            </label>
+
+            <input
+              id="targetCompany"
+              type="text"
+              name="targetCompany"
+              required
+              value={formData.targetCompany}
+              onChange={handleChange}
+              placeholder="e.g. Google, Amazon, Microsoft"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {isSubmitting ? "Creating Account..." : "Create Account"}
+          </button>
+        </form>
+
+        <p className="mt-8 text-center text-sm text-slate-600">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-blue-600 hover:underline"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;

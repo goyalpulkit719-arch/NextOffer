@@ -29,8 +29,6 @@ const register = asyncHandler( async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
 
-	// const email = req.body.email;
-	// const password = req.body.password;
     const { email, password } = req.body;
     const user = await loginUser(email, password);
 

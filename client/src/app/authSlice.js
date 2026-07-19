@@ -6,7 +6,7 @@ const initialState = {
 
     user: {
         id: "",
-        name: "",
+        name: "Pulkit Goyal",
         email: "",
         avatar: "",
         leetcodeUsername: "",
@@ -33,6 +33,7 @@ const authSlice = createSlice({
         },
 
         logout: (state) => {
+            state.isLoading = false;
             state.isLoggedIn = false;
             state.user = initialState.user;
         },
