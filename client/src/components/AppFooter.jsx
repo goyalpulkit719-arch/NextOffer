@@ -8,15 +8,17 @@ const footerLinks = [
   { label: "AI Next Steps", path: "/next-steps" },
 ];
 
-function DashboardFooter() {
+function AppFooter() {
   return (
-    <footer className="mt-12 border-t border-slate-200 pt-8">
-      <div className="rounded-2xl border border-slate-200 bg-white px-5 py-7 shadow-sm md:px-8">
-        <div className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-start">
+    <footer className="border-t border-slate-200 bg-white px-4 py-8 md:px-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
           <div>
             <div className="flex items-center gap-2 text-slate-900">
               <Rocket size={18} className="text-blue-600" />
-              <p className="font-semibold">Built for your next engineering offer</p>
+              <p className="font-semibold">
+                Built for your next engineering offer
+              </p>
             </div>
 
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">
@@ -42,7 +44,9 @@ function DashboardFooter() {
           <p>NextOffer v1.0 · React · Node.js · MongoDB · Gemini AI</p>
 
           <p className="flex items-center gap-1">
-            Made with <Heart size={13} className="fill-rose-500 text-rose-500" /> for ambitious engineers
+            Made with{" "}
+            <Heart size={13} className="fill-rose-500 text-rose-500" /> for
+            ambitious engineers
           </p>
 
           <p>© 2026 NextOffer</p>
@@ -52,4 +56,4 @@ function DashboardFooter() {
   );
 }
 
-export default DashboardFooter;
+export default AppFooter;

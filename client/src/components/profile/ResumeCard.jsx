@@ -1,7 +1,24 @@
 import { motion } from "framer-motion";
 import { Check, ExternalLink, FileText, Upload } from "lucide-react";
 
-function ResumeCard({ resume, onUploadResume, isUploading }) {
+function ResumeCard({ resume, onUploadResume, isUploading, error, onRetry }) {
+  if (error) {
+    return (
+      <section className="rounded-2xl border border-rose-200 bg-rose-50 p-6">
+        <p className="font-semibold text-rose-700">Could not load resume</p>
+        <p className="mt-1 text-sm text-rose-600">{error}</p>
+
+        <button
+          type="button"
+          onClick={onRetry}
+          className="mt-4 rounded-xl bg-rose-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-700"
+        >
+          Try Again
+        </button>
+      </section>
+    );
+  }
+
   const hasResume = Boolean(resume);
 
   return (
@@ -66,7 +83,7 @@ function ResumeCard({ resume, onUploadResume, isUploading }) {
               type="button"
               disabled={isUploading}
               onClick={onUploadResume}
-              className="flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-60"
             >
               <Upload size={16} />
               {isUploading ? "Uploading..." : "Update Resume"}
@@ -87,7 +104,7 @@ function ResumeCard({ resume, onUploadResume, isUploading }) {
             type="button"
             disabled={isUploading}
             onClick={onUploadResume}
-            className="mt-6 flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-60"
           >
             <Upload size={16} />
             {isUploading ? "Uploading..." : "Upload Resume"}

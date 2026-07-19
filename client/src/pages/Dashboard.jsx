@@ -25,7 +25,6 @@ import {
 
 import PlatformDashboard from "../components/dashboard/PlatformDashboard";
 import HistoryModal from "../components/dashboard/HistoryModal";
-import DashboardFooter from "../components/dashboard/DashboardFooter";
 
 const getErrorMessage = (error) =>
   error.response?.data?.message || "Something went wrong.";
@@ -155,7 +154,6 @@ function Dashboard() {
             isRefreshing={isCodeforcesRefreshing}
           />
         </div>
-        <DashboardFooter />
       </div>
 
       <HistoryModal
