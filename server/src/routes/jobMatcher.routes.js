@@ -4,7 +4,7 @@ import { analyzeJob, getJobMatchHistoryC, getJobMatchAnalysisC } from "../contro
 
 const router = express.Router();
 
-router.get("/analyze", authMiddleware, analyzeJob);
+router.post("/analyze", authMiddleware, analyzeJob);
 router.get("/history", authMiddleware, getJobMatchHistoryC);
 router.get("/analysis/:id", authMiddleware, getJobMatchAnalysisC);
 

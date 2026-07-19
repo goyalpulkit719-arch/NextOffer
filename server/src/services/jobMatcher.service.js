@@ -31,9 +31,10 @@ export const generateJobMatchAnalysis = async ( userId, jobTitle, companyName, j
         ...analysis,
     });
 
-    if(!jobMatch) {
-        throw new Error("Error to generate job match analysis");
-    }
+    await jobMatch.populate({
+        path: "resumeId",
+        select: "originalName fileUrl",
+    });
 
     return jobMatch;
 
