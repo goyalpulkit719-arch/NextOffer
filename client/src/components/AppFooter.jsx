@@ -6,6 +6,7 @@ const footerLinks = [
   { label: "Job Matcher", path: "/job-matcher" },
   { label: "Company Insights", path: "/company-insights" },
   { label: "AI Next Steps", path: "/next-steps" },
+  { label: "Home", path: "/" },
 ];
 
 function AppFooter() {
