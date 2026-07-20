@@ -4,7 +4,7 @@ import User from "../models/user.model.js";
 import Resume from "../models/resume.model.js";
 import { LeetcodeProfile } from "../models/leetcodeProfile.model.js";
 import { CodeforcesProfile } from "../models/codeforcesProfile.model.js";
-import CompanyInsight from "../models/CompanyInsight.model.js";
+import CompanyInsight from "../models/companyInsight.model.js";
 import NextSteps from "../models/nextSteps.model.js";
 
 import downloadPdf from "../utils/downloadPdf.js";

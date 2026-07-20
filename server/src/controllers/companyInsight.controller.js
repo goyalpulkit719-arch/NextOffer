@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import asyncHandler from "express-async-handler";
-import CompanyInsight from "../models/CompanyInsight.model.js";
+import CompanyInsight from "../models/companyInsight.model.js";
 import companyHistory from "../models/companyHistory.model.js";
 import { generateCompanyInsight } from "../services/companyInsight.service.js";
 
