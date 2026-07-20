@@ -55,7 +55,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             <img
               src={logo}
               alt="NextOffer"
-              className="h-11 w-11 object-contain"
+              className="h-18 w-18 object-contain"
             />
 
             <div>

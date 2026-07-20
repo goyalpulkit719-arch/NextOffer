@@ -18,7 +18,6 @@ import SkillsCard from "./SkillsCard";
 import ActivityCard from "./ActivityCard";
 import ContestTable from "./ContestTable";
 
-
 function PlatformDashboard({
   platform,
   profile,
@@ -47,7 +46,9 @@ function PlatformDashboard({
   if (error) {
     return (
       <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6 text-rose-700">
-        <p className="font-semibold">Could not load {isLeetcode ? "LeetCode" : "Codeforces"} data</p>
+        <p className="font-semibold">
+          Could not load {isLeetcode ? "LeetCode" : "Codeforces"} data
+        </p>
         <p className="mt-1 text-sm">{error}</p>
       </div>
     );
@@ -60,17 +61,16 @@ function PlatformDashboard({
   const totalSolved = profile.totalSolved || 0;
   const contestHistory = profile.contestHistory || [];
   const activeDaysLast365 = isLeetcode
-  ? Object.entries(profile.submissionCalendar || {}).filter(
-      ([timestamp, submissions]) =>
-        Number(timestamp) * 1000 >= Date.now() - 365 * 24 * 60 * 60 * 1000 &&
-        Number(submissions) > 0
-    ).length
-  : 0;
+    ? Object.entries(profile.submissionCalendar || {}).filter(
+        ([timestamp, submissions]) =>
+          Number(timestamp) * 1000 >= Date.now() - 365 * 24 * 60 * 60 * 1000 &&
+          Number(submissions) > 0,
+      ).length
+    : 0;
   const firstContest = contestHistory[0];
   const lastContest = contestHistory[contestHistory.length - 1];
-  const ratingChange = firstContest && lastContest
-    ? lastContest.rating - firstContest.rating
-    : 0;
+  const ratingChange =
+    firstContest && lastContest ? lastContest.rating - firstContest.rating : 0;
 
   const strongestSkill = isLeetcode
     ? Object.values(profile.skills || {})
@@ -93,7 +93,9 @@ function PlatformDashboard({
           value: profile.easySolved || 0,
           description: "foundation problems",
           color: "green",
-          progress: totalSolved ? ((profile.easySolved || 0) / totalSolved) * 100 : 0,
+          progress: totalSolved
+            ? ((profile.easySolved || 0) / totalSolved) * 100
+            : 0,
         },
         {
           icon: Zap,
@@ -101,7 +103,9 @@ function PlatformDashboard({
           value: profile.mediumSolved || 0,
           description: "interview-level problems",
           color: "yellow",
-          progress: totalSolved ? ((profile.mediumSolved || 0) / totalSolved) * 100 : 0,
+          progress: totalSolved
+            ? ((profile.mediumSolved || 0) / totalSolved) * 100
+            : 0,
         },
         {
           icon: Flame,
@@ -109,7 +113,9 @@ function PlatformDashboard({
           value: profile.hardSolved || 0,
           description: "advanced challenges",
           color: "red",
-          progress: totalSolved ? ((profile.hardSolved || 0) / totalSolved) * 100 : 0,
+          progress: totalSolved
+            ? ((profile.hardSolved || 0) / totalSolved) * 100
+            : 0,
         },
         {
           icon: Gauge,
@@ -125,20 +131,24 @@ function PlatformDashboard({
           description: "personal best",
           color: "purple",
         },
-        {
-          icon: Flame,
-          label: "Max streak",
-          value: profile.maxStreak || 0,
-          description: "consecutive active days",
-          color: "orange",
-        },
-        {
-          icon: CalendarDays,
-          label: "Active days",
-          value: activeDaysLast365,
-          description: "active in the last 365 days",
-          color: "green",
-        },
+        ...(profile.calendarAvailable
+          ? [
+              {
+                icon: Flame,
+                label: "Max streak",
+                value: profile.maxStreak || 0,
+                description: "consecutive active days",
+                color: "orange",
+              },
+              {
+                icon: CalendarDays,
+                label: "Active days",
+                value: activeDaysLast365,
+                description: "active in the last 365 days",
+                color: "green",
+              },
+            ]
+          : []),
       ]
     : [
         {
@@ -226,15 +236,27 @@ function PlatformDashboard({
         color={isLeetcode ? "#f97316" : "#2563eb"}
       />
 
-      {isLeetcode && (
-        <ActivityCard
-          weekly={profile.submissionsLastWeek}
-          monthly={profile.submissionsLastMonth}
-          totalDays={activeDaysLast365}
-          totalLabel="Last 365 days"
-          totalDescription="active days"
-        />
-      )}
+      {isLeetcode &&
+        (profile.calendarAvailable ? (
+          <ActivityCard
+            weekly={profile.submissionsLastWeek}
+            monthly={profile.submissionsLastMonth}
+            totalDays={activeDaysLast365}
+            totalLabel="Last 365 days"
+            totalDescription="active days"
+          />
+        ) : (
+          <section className="rounded-2xl border border-amber-100 bg-linear-to-r from-amber-50 to-orange-50 p-6 shadow-sm">
+            <h3 className="font-semibold text-slate-900">
+              Activity is unavailable
+            </h3>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Your LeetCode submission calendar is hidden or unavailable, so
+              streak, active-day, and recent activity data cannot be displayed.
+            </p>
+          </section>
+        ))}
 
       {isLeetcode && <SkillsCard skills={profile.skills} />}
 

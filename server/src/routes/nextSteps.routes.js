@@ -4,7 +4,7 @@ import { generateRoadmap, getRoadmapHistory, getRoadmapAnalysis } from "../contr
 
 const router = express.Router();
 
-router.get("/generate", authMiddleware, generateRoadmap);
+router.post("/generate", authMiddleware, generateRoadmap);
 router.get("/history", authMiddleware, getRoadmapHistory);
 router.get("/analysis/:roadmapId", authMiddleware, getRoadmapAnalysis);
 
