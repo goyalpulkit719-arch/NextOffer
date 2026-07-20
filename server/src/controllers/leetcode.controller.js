@@ -70,7 +70,7 @@ export const getLeetcodeDashboard = asyncHandler(async (req, res) => {
     if(!profile) {
         let latestData
             try {
-            latestData = await fetchLeetcodeProfile(username.trim());
+            latestData = await fetchLatestLeetcodeData(username.trim());
         } catch (err) {
             const error = new Error("Invalid LeetCode username.");
             error.statusCode = 400;
@@ -219,8 +219,10 @@ export const updateLeetcodeUsername = asyncHandler(async (req, res) => {
         throw error;
     }
 
+    let latestData;
+
     try {
-        await fetchLeetcodeProfile(leetcodeUsername.trim());
+        latestData = await fetchLatestLeetcodeData(leetcodeUsername.trim());
     } catch (err) {
         const error = new Error("Invalid LeetCode username.");
         error.statusCode = 400;
@@ -228,21 +230,28 @@ export const updateLeetcodeUsername = asyncHandler(async (req, res) => {
     }
 
     user.leetcodeUsername = leetcodeUsername.trim();
-
     await user.save();
 
-    await LeetcodeProfile.deleteOne({
+    let profile = await LeetcodeProfile.findOne({
         user: req.user._id,
     });
 
-    await LeetcodeHistory.deleteMany({
-        user: req.user._id,
-    });
+    if (profile) {
+        Object.assign(profile, latestData);
+        await profile.save();
+    } else {
+        profile = await LeetcodeProfile.create({
+            user: req.user._id,
+            ...latestData,
+        });
+    }
+
+    await createHistorySnapshot(req.user._id, latestData);
 
     return res.status(200).json({
         success: true,
         message: "LeetCode username updated successfully.",
-        data: null,
+        data: profile,
     });
 
 });
