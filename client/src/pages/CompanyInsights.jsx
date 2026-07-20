@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Building2, Search } from "lucide-react";
 import { toast } from "sonner";
 
-import { getCompanyInsights } from "../api/companyInsightsApi";
+import { getCompanyInsights } from "../api/CompanyInsightsApi";
 import CompanyInsightsLoader from "../components/company-insights/CompanyInsightsLoader";
 import CompanyInsightsReport from "../components/company-insights/CompanyInsightsReport";
 
