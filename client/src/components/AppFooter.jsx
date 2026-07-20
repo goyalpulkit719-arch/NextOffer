@@ -41,7 +41,32 @@ function AppFooter() {
         </div>
 
         <div className="mt-7 flex flex-col gap-3 border-t border-slate-100 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>NextOffer v1.0 · React · Node.js · MongoDB · Gemini AI</p>
+          <div className="flex flex-row gap-3 text-sm">
+                <a
+                  href="https://github.com/goyalpulkit719-arch/NextOffer"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-fit text-slate-500 transition hover:text-blue-600"
+                >
+                  GitHub
+                </a>
+
+                <a
+                  href="https://linkedin.com/in/pulkit-goyal1"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-fit text-slate-500 transition hover:text-blue-600"
+                >
+                  LinkedIn
+                </a>
+
+                <a
+                  href="mailto:goyalpulkit719@email.com"
+                  className="w-fit text-slate-500 transition hover:text-blue-600"
+                >
+                  Email
+                </a>
+              </div>
 
           <p className="flex items-center gap-1">
             Made with{" "}
