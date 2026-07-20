@@ -18,7 +18,7 @@ function App() {
 
                 dispatch(setUser(response.data));
             } catch (error) {
-                // User is not logged in.
+                dispatch(logout());
             } finally {
                 dispatch(setLoading(false));
             }
