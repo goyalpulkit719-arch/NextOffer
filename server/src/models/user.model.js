@@ -28,14 +28,14 @@ const userSchema = new mongoose.Schema(
 
     leetcodeUsername: {
       type: String,
-      required: [true, "LeetCode username is required"],
       trim: true,
+      default: "",
     },
 
     codeforcesUsername: {
       type: String,
-      required: [true, "Codeforces username is required"],
       trim: true,
+      default: "",
     },
 
     currentResume: {
@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
 
     targetCompany: {
       type: String,
-      default: "",
+      default: "Google",
       required: [true, "Required! you can change later"],
       trim: true,
     },

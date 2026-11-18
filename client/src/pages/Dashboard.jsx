@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
@@ -35,6 +35,7 @@ function Dashboard() {
 
   const leetcode = useSelector((state) => state.leetcode);
   const codeforces = useSelector((state) => state.codeforces);
+  const user = useSelector((state) => state.auth.user);
 
   const [leetcodeHistory, setLeetcodeHistory] = useState([]);
   const [codeforcesHistory, setCodeforcesHistory] = useState([]);
@@ -45,7 +46,7 @@ function Dashboard() {
   const [isLeetcodeRefreshing, setIsLeetcodeRefreshing] = useState(false);
   const [isCodeforcesRefreshing, setIsCodeforcesRefreshing] = useState(false);
 
-  const loadLeetcode = async () => {
+  const loadLeetcode = useCallback(async () => {
     dispatch(setLeetcodeLoading(true));
 
     try {
@@ -57,9 +58,9 @@ function Dashboard() {
     } catch (error) {
       dispatch(setLeetcodeError(getErrorMessage(error)));
     }
-  };
+  }, [dispatch]);
 
-  const loadCodeforces = async () => {
+  const loadCodeforces = useCallback(async () => {
     dispatch(setCodeforcesLoading(true));
 
     try {
@@ -71,7 +72,7 @@ function Dashboard() {
     } catch (error) {
       dispatch(setCodeforcesError(getErrorMessage(error)));
     }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     if (hasLoaded.current) {
@@ -80,9 +81,20 @@ function Dashboard() {
 
     hasLoaded.current = true;
 
-    loadLeetcode();
-    loadCodeforces();
-  }, []);
+    if (user.leetcodeUsername?.trim()) {
+      loadLeetcode();
+    }
+
+    if (user.codeforcesUsername?.trim()) {
+      loadCodeforces();
+    }
+  }, [
+    dispatch,
+    loadCodeforces,
+    loadLeetcode,
+    user.codeforcesUsername,
+    user.leetcodeUsername,
+  ]);
 
   const handleLeetcodeRefresh = async () => {
     try {
@@ -135,6 +147,7 @@ function Dashboard() {
       <div className="mx-auto max-w-7xl space-y-12 pb-10">
         <PlatformDashboard
           platform="leetcode"
+          usernameRequired={!user.leetcodeUsername?.trim()}
           profile={leetcode.profile}
           error={leetcode.error}
           isLoading={leetcode.isLoading}
@@ -146,6 +159,7 @@ function Dashboard() {
         <div className="border-t border-slate-200 pt-12">
           <PlatformDashboard
             platform="codeforces"
+            usernameRequired={!user.codeforcesUsername?.trim()}
             profile={codeforces.profile}
             error={codeforces.error}
             isLoading={codeforces.isLoading}

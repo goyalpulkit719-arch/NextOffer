@@ -24,7 +24,7 @@ function Signup() {
     password: "",
     leetcodeUsername: "",
     codeforcesUsername: "",
-    targetCompany: "",
+    targetCompany: "Google",
   });
 
   const handleChange = (e) => {
@@ -140,19 +140,21 @@ function Signup() {
               htmlFor="leetcodeUsername"
               className="mb-2 block text-sm font-medium text-slate-700"
             >
-              LeetCode Username
+              LeetCode Username (Optional)
             </label>
 
             <input
               id="leetcodeUsername"
               type="text"
               name="leetcodeUsername"
-              required
               value={formData.leetcodeUsername}
               onChange={handleChange}
               placeholder="Enter your LeetCode username"
               className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
             />
+            <p className="mt-1 text-sm text-slate-500">
+              You can add this later from your profile.
+            </p>
           </div>
 
           <div>
@@ -160,19 +162,21 @@ function Signup() {
               htmlFor="codeforcesUsername"
               className="mb-2 block text-sm font-medium text-slate-700"
             >
-              Codeforces Username
+              Codeforces Username (Optional)
             </label>
 
             <input
               id="codeforcesUsername"
               type="text"
               name="codeforcesUsername"
-              required
               value={formData.codeforcesUsername}
               onChange={handleChange}
               placeholder="Enter your Codeforces username"
               className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
             />
+            <p className="mt-1 text-sm text-slate-500">
+              You can add this later from your profile.
+            </p>
           </div>
 
           <div>

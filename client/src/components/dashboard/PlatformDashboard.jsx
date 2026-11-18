@@ -10,6 +10,7 @@ import {
   Trophy,
   Zap,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import ProfileHeader from "./ProfileHeader";
 import StatCard from "./StatCard";
@@ -20,6 +21,7 @@ import ContestTable from "./ContestTable";
 
 function PlatformDashboard({
   platform,
+  usernameRequired,
   profile,
   error,
   isLoading,
@@ -28,6 +30,27 @@ function PlatformDashboard({
   isRefreshing,
 }) {
   const isLeetcode = platform === "leetcode";
+
+  if (usernameRequired) {
+    const platformName = isLeetcode ? "LeetCode" : "Codeforces";
+
+    return (
+      <section className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
+        <h2 className="font-semibold text-slate-900">
+          {platformName} username required
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Add your username to view your {platformName} dashboard.
+        </p>
+        <Link
+          to="/profile"
+          className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+        >
+          Add username
+        </Link>
+      </section>
+    );
+  }
 
   if (isLoading) {
     return (
